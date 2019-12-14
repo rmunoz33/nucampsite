@@ -15,8 +15,8 @@ const mapStateToProps = state => {
         comments: state.comments,
         partners: state.partners,
         promotions: state.promotions 
-    }
-}
+    };
+};
 
 class Main extends Component {
 
@@ -25,18 +25,18 @@ class Main extends Component {
         const HomePage = () => {
             return (
                 <Home 
-                    campsite={props.state.campsites.filter(campsite => campsite.featured)[0]}
-                    promotion={props.state.promotions.filter(promotion => promotion.featured)[0]}
-                    partner={props.state.partners.filter(partner => partner.featured)[0]}
+                    campsite={this.props.campsites.filter(campsite => campsite.featured)[0]}
+                    promotion={this.props.promotions.filter(promotion => promotion.featured)[0]}
+                    partner={this.props.partners.filter(partner => partner.featured)[0]}
                 />
             );
-        }
+        };
 
         const CampsiteWithId = ({match}) => {
             return (
                 <CampsiteInfo 
-                    campsite={props.state.campsites.filter(campsite => campsite.id === +match.params.campsiteId)[0]} 
-                    comments={props.state.comments.filter(comment => comment.campsiteId === +match.params.campsiteId)} 
+                    campsite={this.props.campsites.filter(campsite => campsite.id === +match.params.campsiteId)[0]} 
+                    comments={this.props.comments.filter(comment => comment.campsiteId === +match.params.campsiteId)} 
                 />
             );
         }
@@ -46,9 +46,9 @@ class Main extends Component {
                 <Header />
                 <Switch>
                     <Route path='/home' component={HomePage} />
-                    <Route exact path='/directory' render={() => <Directory campsites={props.state.campsites} />} />
+                    <Route exact path='/directory' render={() => <Directory campsites={this.props.state.campsites} />} />
                     <Route path='/directory/:campsiteId' component={CampsiteWithId} />
-                    <Route exact path='/aboutus' render={() => <About partners={props.state.partners} /> } />
+                    <Route exact path='/aboutus' render={() => <About partners={this.props.state.partners} /> } />
                     <Route exact path='/contactus' component={Contact} />
                     <Redirect to='/home' />
                 </Switch>
